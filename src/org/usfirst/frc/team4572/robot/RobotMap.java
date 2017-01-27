@@ -17,6 +17,8 @@ public class RobotMap {
 	public static int BACK_RIGHT_MOTOR_PORT = 3;
 	public static int BALL_HOPPER_MOTOR_PORT = 4;
 	public static int CAMERA_MOTOR_PORT = 5;
+	public static int ROPE_CLIMBER_MOTOR = 0;
+
 	
 	//CONTROLLER
 	public static int CONTROLLER_PORT = 0;

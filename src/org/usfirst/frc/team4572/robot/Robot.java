@@ -14,6 +14,7 @@ import org.usfirst.frc.team4572.robot.commands.DriveCommand;
 import org.usfirst.frc.team4572.robot.subsystems.BallHopperSystem;
 import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team4572.robot.subsystems.GyroSystem;
+import org.usfirst.frc.team4572.robot.subsystems.RopeClimberSystem;
 import org.usfirst.frc.team4572.robot.subsystems.RotatorSystem;
 
 /**
@@ -24,10 +25,11 @@ import org.usfirst.frc.team4572.robot.subsystems.RotatorSystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	public static final RotatorSystem rotatorSystem = new RotatorSystem();
-	public static final GyroSystem gyroSystem = new GyroSystem();
-	public static final BallHopperSystem ballHopperSystem = new BallHopperSystem();
+	public static DriveSubsystem driveSubsystem = new DriveSubsystem();
+	public static RotatorSystem rotatorSystem = new RotatorSystem();
+	public static GyroSystem gyroSystem = new GyroSystem();
+	public static BallHopperSystem ballHopperSystem = new BallHopperSystem();
+	public static RopeClimberSystem ropeClimberSystem = new RopeClimberSystem();
 	public static OI oi;
 	RobotDrive robotDrive;
 
@@ -41,7 +43,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
+		driveSubsystem = new DriveSubsystem();
+		rotatorSystem = new RotatorSystem();
+		gyroSystem = new GyroSystem();
+		ballHopperSystem = new BallHopperSystem();
+		ropeClimberSystem = new RopeClimberSystem();
 		CameraServer.getInstance().startAutomaticCapture();
 		oi = new OI();
 		chooser.addDefault("Default Auto", new DriveCommand());
