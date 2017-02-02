@@ -18,10 +18,6 @@ public class BallHopperSystem extends Subsystem {
 		
 	}
 	public static Spark hopperMotor = new Spark(RobotMap.BALL_HOPPER_MOTOR_PORT);
-	public static void openBallHopper(){
-		
-	}
-
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new BallHopperCommand());

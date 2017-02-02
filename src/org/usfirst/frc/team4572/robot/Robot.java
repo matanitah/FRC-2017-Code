@@ -4,18 +4,17 @@ package org.usfirst.frc.team4572.robot;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4572.robot.commands.DriveCommand;
 import org.usfirst.frc.team4572.robot.subsystems.BallHopperSystem;
 import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team4572.robot.subsystems.GyroSystem;
 import org.usfirst.frc.team4572.robot.subsystems.RopeClimberSystem;
-import org.usfirst.frc.team4572.robot.subsystems.RotatorSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,17 +24,17 @@ import org.usfirst.frc.team4572.robot.subsystems.RotatorSystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	public static DriveSubsystem driveSubsystem = new DriveSubsystem();
-	public static RotatorSystem rotatorSystem = new RotatorSystem();
-	public static GyroSystem gyroSystem = new GyroSystem();
-	public static BallHopperSystem ballHopperSystem = new BallHopperSystem();
-	public static RopeClimberSystem ropeClimberSystem = new RopeClimberSystem();
-	public static OI oi;
-	RobotDrive robotDrive;
-
-
+	
+	
+	public static DriveSubsystem driveSubsystem;
+	public static GyroSystem gyroSystem;
+	public static BallHopperSystem ballHopperSystem;
+	public static RopeClimberSystem ropeClimberSystem;
+	public static RobotDrive robotDrive;
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	public static OI oi;
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,20 +42,20 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		//chooser.addDefault("Default Auto", new DriveCommand());
 		driveSubsystem = new DriveSubsystem();
-		rotatorSystem = new RotatorSystem();
 		gyroSystem = new GyroSystem();
 		ballHopperSystem = new BallHopperSystem();
 		ropeClimberSystem = new RopeClimberSystem();
-		CameraServer.getInstance().startAutomaticCapture();
+		robotDrive = new RobotDrive(driveSubsystem.frontLeftMotor, driveSubsystem.backLeftMotor, driveSubsystem.frontRightMotor, driveSubsystem.backRightMotor);
 		oi = new OI();
-		chooser.addDefault("Default Auto", new DriveCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-		robotDrive = new RobotDrive(RobotMap.FRONT_LEFT_MOTOR_PORT, RobotMap.BACK_LEFT_MOTOR_PORT, RobotMap.FRONT_RIGHT_MOTOR_PORT, RobotMap.BACK_RIGHT_MOTOR_PORT);
 		robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setExpiration(0.1);
+		robotDrive.setSensitivity(0.5);
+		CameraServer.getInstance().startAutomaticCapture();
+		SmartDashboard.putData("Auto mode", chooser);
+
 	}
 
 	/**
@@ -87,7 +86,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = (Command) chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -107,6 +106,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		driveSubsystem.frontLeftMotor.set(0.5);
+		driveSubsystem.frontRightMotor.set(0.5);
+		driveSubsystem.backLeftMotor.set(0.5);
+		driveSubsystem.backRightMotor.set(0.5);
 	}
 
 	@Override
@@ -126,8 +129,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		 robotDrive.mecanumDrive_Cartesian(OI.getXAxis(), OI.getYAxis(), OI.getZAxis(), OI.getGyro());
-		 
+			Timer.delay(0.005); // wait 5ms to avoid hogging CPU cycles
+
 	}
 
 	/**
@@ -135,5 +138,5 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		}
 	}
-}

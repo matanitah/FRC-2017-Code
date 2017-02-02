@@ -2,6 +2,7 @@ package org.usfirst.frc.team4572.robot.commands;
 
 import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
+import org.usfirst.frc.team4572.robot.subsystems.RopeClimberSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -22,11 +23,12 @@ public class RopeClimberCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(OI.playstation.getRawButton(4)){
-    		Robot.ropeClimberSystem.getClimberMotor().set(1.0);
-    	}
+    	boolean climberButton = OI.playstation.getRawButton(2);
+    	if(climberButton)
+    		RopeClimberSystem.getClimberMotor().set(1.0);
+    		else
+    		RopeClimberSystem.getClimberMotor().set(0.0);
     }
-
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

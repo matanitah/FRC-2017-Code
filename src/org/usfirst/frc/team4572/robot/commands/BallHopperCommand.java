@@ -19,19 +19,20 @@ public class BallHopperCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    }
-
+    	}
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		 if(OI.playstation.getRawButton(5)){
-			 BallHopperSystem.getHopperMotor().set(0.2);
-		 }    		
+        boolean hopperButton = OI.playstation.getRawButton(1);
+    	if(hopperButton)
+			 BallHopperSystem.getHopperMotor().set(1.0);
+    	else
+    		BallHopperSystem.getHopperMotor().set(0.0);
     	}
     
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+		return false;
     }
 
     // Called once after isFinished returns true
