@@ -3,6 +3,7 @@ package org.usfirst.frc.team4572.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team4572.robot.Robot;
+import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
 
 /**
  *
@@ -21,7 +22,8 @@ public class DriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		
+		DriveSubsystem.driveMecanum();
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

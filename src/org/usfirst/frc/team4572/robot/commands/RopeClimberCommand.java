@@ -1,17 +1,20 @@
 package org.usfirst.frc.team4572.robot.commands;
 
+import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
+import org.usfirst.frc.team4572.robot.subsystems.RopeClimberSystem;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RotatorCommand extends Command {
+public class RopeClimberCommand extends Command {
 
-    public RotatorCommand() {
+    public RopeClimberCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.rotatorSystem);
+    	requires(Robot.ropeClimberSystem);
     }
 
     // Called just before this Command runs the first time
@@ -20,9 +23,12 @@ public class RotatorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.rotatorSystem.rotateCamera();
+    	boolean climberButton = OI.playstation.getRawButton(2);
+    	if(climberButton)
+    		RopeClimberSystem.getClimberMotor().set(1.0);
+    		else
+    		RopeClimberSystem.getClimberMotor().set(0.0);
     }
-
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

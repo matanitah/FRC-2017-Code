@@ -11,12 +11,13 @@ public class RobotMap {
 	// following variables to use with your drivetrain subsystem.
 	
 	//MOTORS
-	public static int FRONT_LEFT_MOTOR_PORT = 0;
-	public static int FRONT_RIGHT_MOTOR_PORT = 1;
-	public static int BACK_LEFT_MOTOR_PORT = 2;
-	public static int BACK_RIGHT_MOTOR_PORT = 3;
-	public static int BALL_HOPPER_MOTOR_PORT = 4;
-	public static int CAMERA_MOTOR_PORT = 5;
+	public final static int FRONT_LEFT_MOTOR_PORT = 0;
+	public final static int FRONT_RIGHT_MOTOR_PORT = 2;
+	public final static int BACK_LEFT_MOTOR_PORT = 1;
+	public final static int BACK_RIGHT_MOTOR_PORT = 3;
+	public final static int BALL_HOPPER_MOTOR_PORT = 4;
+	public final static int ROPE_CLIMBER_MOTOR = 5;
+
 	
 	//CONTROLLER
 	public static int CONTROLLER_PORT = 0;
