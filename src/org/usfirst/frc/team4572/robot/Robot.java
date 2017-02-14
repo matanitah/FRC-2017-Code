@@ -25,7 +25,6 @@ import org.usfirst.frc.team4572.robot.subsystems.RopeClimberSystem;
  */
 public class Robot extends IterativeRobot {
 	
-	
 	public static DriveSubsystem driveSubsystem;
 	public static GyroSystem gyroSystem;
 	public static BallHopperSystem ballHopperSystem;
@@ -49,13 +48,14 @@ public class Robot extends IterativeRobot {
 		ropeClimberSystem = new RopeClimberSystem();
 		robotDrive = new RobotDrive(driveSubsystem.frontLeftMotor, driveSubsystem.backLeftMotor, driveSubsystem.frontRightMotor, driveSubsystem.backRightMotor);
 		oi = new OI();
-		robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
+		//robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
+		//robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 		robotDrive.setExpiration(0.1);
-		robotDrive.setSensitivity(0.5);
 		CameraServer.getInstance().startAutomaticCapture();
 		SmartDashboard.putData("Auto mode", chooser);
-
+		
 	}
 
 	/**

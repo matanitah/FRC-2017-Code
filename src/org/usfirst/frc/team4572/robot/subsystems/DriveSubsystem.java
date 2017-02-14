@@ -35,6 +35,6 @@ public class DriveSubsystem extends Subsystem {
 		return backRightMotor;
 	}
 	public static void driveMecanum(){
-		 Robot.robotDrive.mecanumDrive_Cartesian(OI.getXAxis(), OI.getYAxis(), OI.getZAxis(), OI.getGyro());
+		 Robot.robotDrive.mecanumDrive_Cartesian(OI.getXAxis(), OI.getYAxis(), OI.getZAxis(),0);
 	}
 }

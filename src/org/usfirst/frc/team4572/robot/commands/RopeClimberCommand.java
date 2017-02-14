@@ -24,10 +24,20 @@ public class RopeClimberCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	boolean climberButton = OI.playstation.getRawButton(2);
-    	if(climberButton)
-    		RopeClimberSystem.getClimberMotor().set(1.0);
-    		else
-    		RopeClimberSystem.getClimberMotor().set(0.0);
+    	boolean reverseButton = OI.playstation.getRawButton(5);
+    	if(climberButton){
+    		RopeClimberSystem.getClimberMotor1().set(-1.0);
+    		RopeClimberSystem.getClimberMotor2().set(1.0);
+    	}
+    	else if(reverseButton){
+    		RopeClimberSystem.getClimberMotor1().set(1.0);
+    		RopeClimberSystem.getClimberMotor2().set(-1.0);
+    	}
+    	else{
+    		RopeClimberSystem.getClimberMotor1().set(0.0);
+    		RopeClimberSystem.getClimberMotor2().set(0.0);
+    	}
+    	
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

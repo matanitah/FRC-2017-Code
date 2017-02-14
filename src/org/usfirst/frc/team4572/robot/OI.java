@@ -16,7 +16,8 @@ public class OI {
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
-    public static Joystick playstation = new Joystick(RobotMap.CONTROLLER_PORT);
+    public static Joystick playstation = new Joystick(RobotMap.PLAYSTATION_PORT);
+    public static Joystick logitech = new Joystick(RobotMap.LOGITECH_PORT);
 	public static Button ropeButton = new JoystickButton(playstation, 1);
 	public static Button hopperButton = new JoystickButton(playstation, 2);
     public static AnalogGyro analogGyro = new AnalogGyro(RobotMap.GYROSCOPE_PORT);

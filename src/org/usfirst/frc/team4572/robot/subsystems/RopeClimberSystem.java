@@ -10,11 +10,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class RopeClimberSystem extends Subsystem {
-	public static Spark  ropeClimberMotor = new Spark(RobotMap.ROPE_CLIMBER_MOTOR);
+	public static Spark  ropeClimberMotor1 = new Spark(RobotMap.ROPE_CLIMBER_MOTOR_1);
+	public static Spark ropeClimberMotor2 = new Spark(RobotMap.ROPE_CLIMBER_MOTOR_2);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public static Spark getClimberMotor(){
-		return ropeClimberMotor;
+	public static Spark getClimberMotor1(){
+		return ropeClimberMotor1;
+	}
+	public static Spark getClimberMotor2(){
+		return ropeClimberMotor2;
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

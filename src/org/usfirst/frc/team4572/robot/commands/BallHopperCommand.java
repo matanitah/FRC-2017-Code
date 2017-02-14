@@ -22,11 +22,21 @@ public class BallHopperCommand extends Command {
     	}
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        boolean hopperButton = OI.playstation.getRawButton(1);
-    	if(hopperButton)
+        boolean hopperButton = OI.logitech.getRawButton(3);
+       // int count = BallHopperSystem.encoder.get();
+    	if(hopperButton){
 			 BallHopperSystem.getHopperMotor().set(1.0);
-    	else
-    		BallHopperSystem.getHopperMotor().set(0.0);
+    	}
+			 else{
+				 BallHopperSystem.getHopperMotor().set(0.0);
+			 }
+//    	}
+//    	else if(hopperButto){
+//    		BallHopperSystem.getHopperMotor().set(0.01);
+//    	}
+//    	else if(!hopperButton){
+//    		BallHopperSystem.getHopperMotor().set(0.0);
+//    		Timer.delay(2.0);
     	}
     
 
