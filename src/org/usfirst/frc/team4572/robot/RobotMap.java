@@ -28,8 +28,10 @@ public class RobotMap {
 	
 	//SENSORS
 	public static int GYROSCOPE_PORT = 0;
-	//public final static int ENOCODER_PORT_1 = 0;
-	//public final static int ENCODER_PORT_2 = 1;
+	
+	public final static int ENCODER_PORT_1 = 1;
+	public final static int ENCODER_PORT_2 = 2;
+			;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
