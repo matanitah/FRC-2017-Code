@@ -16,15 +16,22 @@ public class RobotMap {
 	public final static int BACK_LEFT_MOTOR_PORT = 1;
 	public final static int BACK_RIGHT_MOTOR_PORT = 3;
 	public final static int BALL_HOPPER_MOTOR_PORT = 4;
-	public final static int ROPE_CLIMBER_MOTOR = 5;
+	public final static int ROPE_CLIMBER_MOTOR_1 = 5;
+	public final static int ROPE_CLIMBER_MOTOR_2 = 6;
+	
 
 	
 	//CONTROLLER
-	public static int CONTROLLER_PORT = 0;
+	public static int PLAYSTATION_PORT = 0;
+	public static int LOGITECH_PORT = 1;
 
 	
 	//SENSORS
 	public static int GYROSCOPE_PORT = 0;
+	
+	public final static int ENCODER_PORT_1 = 1;
+	public final static int ENCODER_PORT_2 = 2;
+			;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;

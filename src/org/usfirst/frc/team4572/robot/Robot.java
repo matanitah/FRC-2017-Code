@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team4572.robot.commands.SenseCommand;
 import org.usfirst.frc.team4572.robot.subsystems.BallHopperSystem;
 import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team4572.robot.subsystems.GyroSystem;
@@ -24,8 +25,6 @@ import org.usfirst.frc.team4572.robot.subsystems.RopeClimberSystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
-	
 	public static DriveSubsystem driveSubsystem;
 	public static GyroSystem gyroSystem;
 	public static BallHopperSystem ballHopperSystem;
@@ -49,13 +48,15 @@ public class Robot extends IterativeRobot {
 		ropeClimberSystem = new RopeClimberSystem();
 		robotDrive = new RobotDrive(driveSubsystem.frontLeftMotor, driveSubsystem.backLeftMotor, driveSubsystem.frontRightMotor, driveSubsystem.backRightMotor);
 		oi = new OI();
-		robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
+		//robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
+		//robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 		robotDrive.setExpiration(0.1);
-		robotDrive.setSensitivity(0.5);
+		CameraServer.getInstance().startAutomaticCapture();
 		CameraServer.getInstance().startAutomaticCapture();
 		SmartDashboard.putData("Auto mode", chooser);
-
+		
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = (Command) chooser.getSelected();
-
+		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -106,21 +107,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
 		driveSubsystem.frontLeftMotor.set(0.5);
 		driveSubsystem.frontRightMotor.set(0.5);
 		driveSubsystem.backLeftMotor.set(0.5);
 		driveSubsystem.backRightMotor.set(0.5);
-	}
-
-	@Override
-	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
-		
 	}
 
 	/**
@@ -129,6 +120,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		oi.senseButton.whenReleased(new SenseCommand());
 			Timer.delay(0.005); // wait 5ms to avoid hogging CPU cycles
 
 	}

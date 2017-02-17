@@ -19,14 +19,36 @@ public class BallHopperCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	BallHopperSystem.encoder.reset();
     	}
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        boolean hopperButton = OI.playstation.getRawButton(1);
-    	if(hopperButton)
-			 BallHopperSystem.getHopperMotor().set(1.0);
-    	else
-    		BallHopperSystem.getHopperMotor().set(0.0);
+        boolean hopperButton = OI.logitech.getRawButton(1);
+       double count = BallHopperSystem.encoder.getDistance();
+		System.out.println(count);
+
+    	if(hopperButton){
+    		if(count < 61){
+    			if(count > 45)
+			 BallHopperSystem.getHopperMotor().set(0.5);
+    			else if(count > 30)
+    				 BallHopperSystem.getHopperMotor().set(0.65);
+    			else
+    		 BallHopperSystem.getHopperMotor().set(1.0);    				
+    		}else
+				 BallHopperSystem.getHopperMotor().set(0.0);
+
+    	}
+		else{
+				 BallHopperSystem.getHopperMotor().set(-0.1);
+		 }
+//    	}
+//    	else if(hopperButto){
+//    		BallHopperSystem.getHopperMotor().set(0.01);
+//    	}
+//    	else if(!hopperButton){
+//    		BallHopperSystem.getHopperMotor().set(0.0);
+//    		Timer.delay(2.0);
     	}
     
 

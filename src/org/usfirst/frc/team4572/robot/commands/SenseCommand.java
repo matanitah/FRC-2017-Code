@@ -1,20 +1,18 @@
 package org.usfirst.frc.team4572.robot.commands;
 
-import org.usfirst.frc.team4572.robot.OI;
 import org.usfirst.frc.team4572.robot.Robot;
-import org.usfirst.frc.team4572.robot.subsystems.RopeClimberSystem;
+import org.usfirst.frc.team4572.robot.subsystems.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RopeClimberCommand extends Command {
+public class SenseCommand extends Command {
 
-    public RopeClimberCommand() {
+    public SenseCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.ropeClimberSystem);
     }
 
     // Called just before this Command runs the first time
@@ -23,22 +21,16 @@ public class RopeClimberCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean climberButton = OI.playstation.getRawButton(2);
-    	boolean reverseButton = OI.playstation.getRawButton(5);
-    	if(climberButton){
-    		RopeClimberSystem.getClimberMotor1().set(-1.0);
-    		RopeClimberSystem.getClimberMotor2().set(1.0);
-    	}
-    	else if(reverseButton){
-    		RopeClimberSystem.getClimberMotor1().set(1.0);
-    		RopeClimberSystem.getClimberMotor2().set(-1.0);
+    	if(DriveSubsystem.sensitivityToggle){
+    		DriveSubsystem.sensitivityToggle = !DriveSubsystem.sensitivityToggle;
+    		Robot.robotDrive.setSensitivity(0.5);
     	}
     	else{
-    		RopeClimberSystem.getClimberMotor1().set(0.0);
-    		RopeClimberSystem.getClimberMotor2().set(0.0);
+    		DriveSubsystem.sensitivityToggle = !DriveSubsystem.sensitivityToggle;
+    		Robot.robotDrive.setSensitivity(1.0);
     	}
-    	
     }
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

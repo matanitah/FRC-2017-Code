@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -16,10 +17,12 @@ public class OI {
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
-    public static Joystick playstation = new Joystick(RobotMap.CONTROLLER_PORT);
-	public static Button ropeButton = new JoystickButton(playstation, 1);
+    public static Joystick playstation = new Joystick(RobotMap.PLAYSTATION_PORT);
+    public static Joystick logitech = new Joystick(RobotMap.LOGITECH_PORT);
+	public Button senseButton = new JoystickButton(logitech, 6);
 	public static Button hopperButton = new JoystickButton(playstation, 2);
     public static AnalogGyro analogGyro = new AnalogGyro(RobotMap.GYROSCOPE_PORT);
+    
     public static double getXAxis(){
     	return playstation.getX();
     }
@@ -46,4 +49,6 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+    
+
 }
